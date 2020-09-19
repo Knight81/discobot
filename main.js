@@ -61,19 +61,3 @@ client.on("message", message => {
 
 client.login(secrets.botToken);
 
-
-// DEPRECATED 
-function gabriRussianRoulette(message) {
-    var random_boolean = Math.random() >= 0.5;
-    
-    if(random_boolean){
-
-        message.channel.send(`A la puta calle ${gabriUser.username}`);
-        message.member.voice.setChannel(null);
-
-    } else {
-
-        message.channel.send(`Te has librado esta vez ${gabriUser.username}`);
-
-    }
-}
