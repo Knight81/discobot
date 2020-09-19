@@ -1,3 +1,6 @@
+
+const secrets = require('./secrets.js');
+
 const Discord = require('discord.js');
 
 const client  = new Discord.Client();
@@ -20,19 +23,11 @@ const prefix = '%';
 
 client.once('ready', () => {
     console.log('Knightbot is online');
-    client.users.fetch("163641996274040832", true, false).then(user => {
-        console.log("Obtained gabri user");
-        gabriUser = user;
-        return user; });
 });
 
 
 client.on("message", message => {
 
-    // Check if message is from Gabri, to initiate russian roulette
-    if(gabriUser !== null && message.author == gabriUser){
-        gabriRussianRoulette(message);
-    }
     // Message is not a valid command, so we finish reading
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -64,7 +59,7 @@ client.on("message", message => {
 
 
 
-client.login('MTg0OTQwNTgyMDE4MjIwMDMy.V0VdVg.1E-Ct0wA_QOYLH-8IHAE10E98JI');
+client.login(secrets.botToken);
 
 
 // DEPRECATED 
