@@ -3,7 +3,7 @@ const secrets = require('./secrets.js');
 
 const Discord = require('discord.js');
 
-const client  = new Discord.Client();
+const client = new Discord.Client();
 
 const fs = require('fs');
 
@@ -13,7 +13,7 @@ const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith(
 
 var gabriUser = null;
 
-for(const file of commandFiles){
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.name, command);
@@ -29,32 +29,43 @@ client.once('ready', () => {
 client.on("message", message => {
 
     // Message is not a valid command, so we finish reading
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) {
 
-    console.log('Message received:'+message);
+    } else {
 
-    const args = message.content.slice(prefix.length).split(/ +/);
+        const args = message.content.slice(prefix.length).split(/ +/);
 
-    const command = args.shift().toLowerCase();
+        const command = args.shift().toLowerCase();
 
-    
-    switch (command) {
-        case 'helloworld':
-            client.commands.get('helloworld').execute(message, args);
-            break;
 
-        case 'help':
-            client.commands.get('help').execute(message, args);
-            break;
+        switch (command) {
+            case 'helloworld':
+                client.commands.get('helloworld').execute(message, args);
+                break;
 
-        case 'mentionme':
-            client.commands.get('mentionme').execute(message, args);
-            break;
-    
-        default:
-            break;
+            case 'help':
+                client.commands.get('help').execute(message, args);
+                break;
+
+            case 'mentionme':
+                client.commands.get('mentionme').execute(message, args);
+                break;
+
+            case 'pod':
+                client.commands.get('pod').execute(message, args);
+                break;
+
+            case 'gabo':
+                client.commands.get('gabo').execute(message, args);
+                break;
+
+            case 'soundboard':
+                client.commands.get('soundboard').execute(message, args);
+
+            default:
+                break;
+        }
     }
-    
 });
 
 
